@@ -1,12 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import { createTaskSchema } from "@/lib/validations";
 import { NextRequest, NextResponse } from "next/server";
-import { Status, Priority, Prisma } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams;
-  const status = searchParams.get("status") as Status | null;
-  const priority = searchParams.get("priority") as Priority | null;
+  const status = searchParams.get("status");
+  const priority = searchParams.get("priority");
   const search = searchParams.get("search");
 
   const where: Prisma.TaskWhereInput = {
