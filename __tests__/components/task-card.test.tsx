@@ -73,7 +73,7 @@ describe("TaskCard", () => {
 
   it("displays the creation date", () => {
     render(<TaskCard task={mockTask} />);
-    const dateElements = screen.getAllByText(/2\/27\/2026|27\/2\/2026|2026/);
+    const dateElements = screen.getAllByText(/Feb 27|27 Feb|2026/);
     expect(dateElements.length).toBeGreaterThanOrEqual(1);
   });
 });

@@ -51,7 +51,7 @@ export default async function DashboardPage({
   };
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-7xl">
+    <div className="container mx-auto py-6 sm:py-8 px-3 sm:px-4 max-w-7xl">
       <DashboardHeader counts={counts} />
       <TaskFilters />
       <TaskBoard tasks={tasks} />

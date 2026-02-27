@@ -16,7 +16,7 @@ export default async function TaskDetailPage({
   }
 
   return (
-    <div className="container mx-auto py-8 px-4 max-w-2xl">
+    <div className="container mx-auto py-6 sm:py-8 px-3 sm:px-4 max-w-2xl">
       <TaskDetailCard task={task} />
     </div>
   );

@@ -20,7 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Plus, Sparkles } from "lucide-react";
+import { Plus } from "lucide-react";
 import { createTask } from "@/actions/tasks";
 import { toast } from "sonner";
 import { STATUS_LABELS, PRIORITY_LABELS } from "@/lib/types";
@@ -36,7 +36,7 @@ export function CreateTaskDialog() {
     startTransition(async () => {
       try {
         await createTask(formData);
-        toast.success("Task created successfully");
+        toast.success("\uD83C\uDF80 Task created!");
         setOpen(false);
       } catch {
         toast.error("Failed to create task");
@@ -47,54 +47,53 @@ export function CreateTaskDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-white text-indigo-600 hover:bg-indigo-50 font-semibold shadow-sm">
+        <Button className="bg-white text-pink-600 hover:bg-pink-50 font-bold shadow-sm rounded-full px-5">
           <Plus className="h-4 w-4 mr-2" />
           New Task
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[480px]">
+      <DialogContent className="sm:max-w-[480px] rounded-2xl">
         <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-primary" />
+          <DialogTitle className="flex items-center gap-2 text-lg">
             Create New Task
           </DialogTitle>
           <DialogDescription>
-            Add a new task to your board. Fill in the details below.
+            Add a new task to your board~
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="space-y-4 mt-2">
           <div className="space-y-2">
-            <Label htmlFor="title">Title *</Label>
+            <Label htmlFor="title" className="font-bold">Title *</Label>
             <Input
               id="title"
               name="title"
               placeholder="What needs to be done?"
               required
               maxLength={100}
-              className="focus-visible:ring-primary"
+              className="rounded-xl border-pink-200 dark:border-pink-800/30 focus-visible:ring-pink-400"
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description" className="font-bold">Description</Label>
             <Textarea
               id="description"
               name="description"
-              placeholder="Add more details about this task..."
+              placeholder="Add more details..."
               rows={3}
               maxLength={500}
-              className="focus-visible:ring-primary"
+              className="rounded-xl border-pink-200 dark:border-pink-800/30 focus-visible:ring-pink-400"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="status">Status</Label>
+              <Label htmlFor="status" className="font-bold">Status</Label>
               <Select name="status" defaultValue="TODO">
-                <SelectTrigger>
+                <SelectTrigger className="rounded-xl border-pink-200 dark:border-pink-800/30">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="rounded-xl">
                   {Object.entries(STATUS_LABELS).map(([value, label]) => (
                     <SelectItem key={value} value={value}>
                       {label}
@@ -105,12 +104,12 @@ export function CreateTaskDialog() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="priority">Priority</Label>
+              <Label htmlFor="priority" className="font-bold">Priority</Label>
               <Select name="priority" defaultValue="MEDIUM">
-                <SelectTrigger>
+                <SelectTrigger className="rounded-xl border-pink-200 dark:border-pink-800/30">
                   <SelectValue />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="rounded-xl">
                   {Object.entries(PRIORITY_LABELS).map(([value, label]) => (
                     <SelectItem key={value} value={value}>
                       {label}
@@ -121,20 +120,21 @@ export function CreateTaskDialog() {
             </div>
           </div>
 
-          <div className="flex justify-end gap-3 pt-4 border-t">
+          <div className="flex justify-end gap-3 pt-4 border-t border-pink-100 dark:border-pink-800/30">
             <Button
               type="button"
               variant="outline"
               onClick={() => setOpen(false)}
+              className="rounded-full border-pink-200 dark:border-pink-800/30"
             >
               Cancel
             </Button>
             <Button
               type="submit"
               disabled={isPending}
-              className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+              className="rounded-full bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 font-bold"
             >
-              {isPending ? "Creating..." : "Create Task"}
+              {isPending ? "Creating..." : "\uD83C\uDF80 Create Task"}
             </Button>
           </div>
         </form>

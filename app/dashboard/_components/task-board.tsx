@@ -2,7 +2,6 @@
 
 import { TaskCard } from "./task-card";
 import { STATUS_LABELS, type Task, type TaskStatus } from "@/lib/types";
-import { ListTodo, Loader, CheckCircle2 } from "lucide-react";
 
 interface TaskBoardProps {
   tasks: Task[];
@@ -10,31 +9,31 @@ interface TaskBoardProps {
 
 const COLUMNS: {
   status: TaskStatus;
-  icon: React.ReactNode;
+  emoji: string;
   gradient: string;
-  dot: string;
   bg: string;
+  border: string;
 }[] = [
   {
     status: "TODO",
-    icon: <ListTodo className="h-4 w-4" />,
-    gradient: "from-slate-500 to-slate-600",
-    dot: "bg-slate-400",
-    bg: "bg-slate-50/50 dark:bg-slate-900/20",
+    emoji: "\u{1F338}",
+    gradient: "from-purple-400 to-violet-400",
+    bg: "bg-purple-50/60 dark:bg-purple-900/10",
+    border: "border-purple-200 dark:border-purple-800/40",
   },
   {
     status: "IN_PROGRESS",
-    icon: <Loader className="h-4 w-4" />,
-    gradient: "from-blue-500 to-indigo-600",
-    dot: "bg-blue-400",
-    bg: "bg-blue-50/50 dark:bg-blue-900/10",
+    emoji: "\u{1F4AB}",
+    gradient: "from-sky-400 to-blue-400",
+    bg: "bg-sky-50/60 dark:bg-sky-900/10",
+    border: "border-sky-200 dark:border-sky-800/40",
   },
   {
     status: "DONE",
-    icon: <CheckCircle2 className="h-4 w-4" />,
-    gradient: "from-emerald-500 to-green-600",
-    dot: "bg-emerald-400",
-    bg: "bg-emerald-50/50 dark:bg-emerald-900/10",
+    emoji: "\u{1F31F}",
+    gradient: "from-pink-400 to-rose-400",
+    bg: "bg-pink-50/60 dark:bg-pink-900/10",
+    border: "border-pink-200 dark:border-pink-800/40",
   },
 ];
 
@@ -50,25 +49,25 @@ export function TaskBoard({ tasks }: TaskBoardProps) {
         <div key={column.status} className="flex flex-col">
           {/* Column Header */}
           <div
-            className={`flex items-center gap-2 rounded-t-xl bg-gradient-to-r ${column.gradient} px-4 py-3 text-white shadow-sm`}
+            className={`flex items-center gap-2 rounded-t-2xl bg-gradient-to-r ${column.gradient} px-5 py-3.5 text-white shadow-sm`}
           >
-            {column.icon}
-            <span className="font-semibold text-sm">
+            <span className="text-lg">{column.emoji}</span>
+            <span className="font-bold text-sm">
               {STATUS_LABELS[column.status]}
             </span>
-            <span className="ml-auto flex h-6 w-6 items-center justify-center rounded-full bg-white/20 text-xs font-bold">
+            <span className="ml-auto flex h-7 w-7 items-center justify-center rounded-full bg-white/25 text-xs font-bold backdrop-blur-sm">
               {column.tasks.length}
             </span>
           </div>
 
           {/* Column Body */}
           <div
-            className={`flex-1 rounded-b-xl border border-t-0 ${column.bg} p-3 space-y-3 min-h-[280px]`}
+            className={`flex-1 rounded-b-2xl border-2 border-t-0 ${column.border} ${column.bg} p-3 space-y-3 min-h-[280px]`}
           >
             {column.tasks.length === 0 ? (
               <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
-                <div className={`h-3 w-3 rounded-full ${column.dot} mb-3 opacity-40`} />
-                <p className="text-sm">No tasks yet</p>
+                <span className="text-3xl mb-2 opacity-30">&#128516;</span>
+                <p className="text-sm">No tasks here~</p>
               </div>
             ) : (
               column.tasks.map((task) => (
