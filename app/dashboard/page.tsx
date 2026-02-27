@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import type { Prisma, Status, Priority } from "@prisma/client";
 import { DashboardHeader } from "./_components/dashboard-header";
 import { TaskBoard } from "./_components/task-board";
 import { TaskFilters } from "./_components/task-filters";
@@ -16,9 +16,9 @@ export default async function DashboardPage({
   const params = await searchParams;
 
   const where: Prisma.TaskWhereInput = {
-    ...(params.status && { status: params.status as Prisma.EnumStatusFilter }),
+    ...(params.status && { status: params.status as Status }),
     ...(params.priority && {
-      priority: params.priority as Prisma.EnumPriorityFilter,
+      priority: params.priority as Priority,
     }),
     ...(params.search && {
       OR: [
